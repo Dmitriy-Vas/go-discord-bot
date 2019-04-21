@@ -23,7 +23,7 @@ func getMatch(r string, m string) (match string, found bool) {
 	return
 }
 
-// todo found best solution
+// todo find best solution
 func MessageCreated(s *dgo.Session, mc *dgo.MessageCreate) {
 	if !strings.HasPrefix(mc.Content, config.Data.Prefix) {
 		return
