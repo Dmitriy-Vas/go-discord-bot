@@ -1,0 +1,24 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output
+*.out
+Windows*
+Darwin*
+Linux*
+
+# IDEA configuration files
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Project configuration files
+config.json
