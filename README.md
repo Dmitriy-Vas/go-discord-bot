@@ -58,7 +58,10 @@ Logged in as Dmitriy
 
 + [n-n] *n* is any number. Specify number between this range.
 + [word] *word* is any word. Specify any word instead of this.
-+ [user] *user* is any user mention. Specify any mention, example: *@Dmitriy#0325*
++ [user] *user* is any user **mention**. Specify any mention, example: *@Dmitriy#0325*
++ [role] *role* is any role **name**. Specify any role name instead of this.
++ If command has "+" suffix, then you can specify multiple values.
++ Don't forget to add command prefix.
 
 <details>
 <summary>Commands list</summary>
@@ -66,5 +69,12 @@ Logged in as Dmitriy
 + Ping
     - Responds with "pong"
 + Del [0-100]  
-    - Removes specified amount of last messages
+    - Removes specified amount of last messages in the current channel
++ Notice
+    - Shows bot's notice
++ Role [user]+ [role]
+    - Adds or removes roles from specified users
++ Ban [user] [0-n] [word]+
+    - Banhammer's hit. Specified user will lost his soul for specified time.
+    - Provide the correct reason instead of [word], nobody likes to lose souls without reason.
 </details>
