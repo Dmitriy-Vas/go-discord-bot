@@ -34,7 +34,7 @@ __Bot token:__
 + __If you don't have a bot__:
     + At the upper right corner click to the "New Application" button.
     + Specify any name to your bot.
-    + ^See how to get token if you already have bot^
+    + ^See how to get token if you already have a bot^
 ---
 </details>
 
@@ -94,7 +94,7 @@ After setting up the config.json file, bot is ready to go. To run program, simpl
 If you have setup your config.json properly (and used the correct credentials) you should see an output similar to this
 
 ```
-Loaded 2 commands
+Loaded 5 commands
 Loaded config
 Logged in as Dmitriy
 ```
