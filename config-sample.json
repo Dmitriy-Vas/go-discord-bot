@@ -1,7 +1,5 @@
 {
     "token": "KuZrjndpA2sjTCuwqGecWUrkXd2ehysFRx6AM8rqYxr56H",
-    "prefix": ">",
-    "commands": [
-        "ping"
-    ]
+    "user": false,
+    "prefix": ">"
 }

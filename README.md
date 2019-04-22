@@ -4,9 +4,10 @@ A console based discord bot built with Go.
 
 ### Table of Contents
 
-+ [Install]()
-+ [Setup]()
-+ [Run]()
++ [Install](https://github.com/Dmitriy-Vas/go-discord-bot#Install)
++ [Setup](https://github.com/Dmitriy-Vas/go-discord-bot#Setup)
++ [Run](https://github.com/Dmitriy-Vas/go-discord-bot#Run)
++ [Commands](https://github.com/Dmitriy-Vas/go-discord-bot#Commands)
 
 ### Install
 
@@ -35,9 +36,10 @@ Now that bot is installed, you will need to setup your config.json file. This ca
 {
     // Your discord token to connect bot
     "token": "KuZrjndpA2sjTCuwqGecWUrkXd2ehysFRx6AM8rqYxr56H",
+    // true if you use user account, false if bot
+    "user": false,
     // Your prefix to use with commands
-    "prefix": ">",
-    ...
+    "prefix": ">"
 }
 ```
 
@@ -47,6 +49,22 @@ After setting up the config.json file, bot is ready to go. To run program, simpl
 If you have setup your config.json properly (and used the correct credentials) you should see an output similar to this
 
 ```
-Loaded 1 commands
-Logged as Dmitriy
+Loaded 2 commands
+Loaded config
+Logged in as Dmitriy
 ```
+
+### Commands
+
++ [n-n] *n* is any number. Specify number between this range.
++ [word] *word* is any word. Specify any word instead of this.
++ [user] *user* is any user mention. Specify any mention, example: *@Dmitriy#0325*
+
+<details>
+<summary>Commands list</summary>
+
++ Ping
+    - Responds with "pong"
++ Del [0-100]  
+    - Removes specified amount of last messages
+</details>

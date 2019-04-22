@@ -30,9 +30,15 @@ func isErr(err error) {
 }
 
 func (d *Bot) createBot() {
+	tokenPrefix := ""
+	if !config.Data.User {
+		tokenPrefix = "Bot "
+	}
+
 	// Create new session
-	s, err := dgo.New(config.Data.Token)
+	s, err := dgo.New(tokenPrefix + config.Data.Token)
 	isErr(err)
+	s.State.MaxMessageCount = 100
 	d.Session = s
 
 	// Fetch information about bot
@@ -40,7 +46,7 @@ func (d *Bot) createBot() {
 	isErr(err)
 	d.User = u
 
-	fmt.Println("Logged as", u.Username)
+	fmt.Println("Logged in as", u.Username)
 
 	// Open connection to discord
 	err = s.Open()
@@ -63,14 +69,12 @@ func main() {
 	bot.createBot()
 	bot.addHandlers()
 
-	// Close connection to discord at the end
-	defer bot.Session.Close()
-
 	// Catch interrupt signal and save config
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, os.Interrupt, os.Kill, syscall.SIGINT, syscall.SIGTERM)
 	<-signalChan
 
-	config.SaveConfig()
+	// Close connection to discord
+	bot.Session.Close()
 	os.Exit(0)
 }
