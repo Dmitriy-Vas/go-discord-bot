@@ -49,7 +49,7 @@ func channelType(s *dgo.Session, m *dgo.MessageCreate) (*dgo.ChannelType, error)
 
 func commandAlias(m *dgo.MessageCreate) (alias string) {
 	alias = ""
-	r := regexp.MustCompile("^>(\\w+)")
+	r := regexp.MustCompile("^" + config.Data.Prefix + "(\\w+)")
 	matches := r.FindAllStringSubmatch(m.Content, -1)
 	if matches != nil && matches[0] != nil {
 		alias = matches[0][1]
@@ -205,9 +205,9 @@ func ban(s *dgo.Session, m *dgo.MessageCreate) {
 		reason = strings.Join(args[3:], " ")
 		fallthrough
 	case len(args) > 2:
-		time, err := strconv.Atoi(args[2])
+		timeArg, err := strconv.Atoi(args[2])
 		if err == nil {
-			time = time
+			time = timeArg
 		}
 	}
 	err := s.GuildBanCreateWithReason(m.GuildID, m.Mentions[0].ID, reason, time)
