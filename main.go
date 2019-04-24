@@ -29,6 +29,7 @@ func isErr(err error) {
 	}
 }
 
+// Initialize and connect bot to discord
 func (d *Bot) createBot() {
 	tokenPrefix := ""
 	if !config.Data.User {
@@ -36,7 +37,7 @@ func (d *Bot) createBot() {
 	}
 
 	// Create new session
-	s, err := dgo.New(tokenPrefix + config.Data.Token)
+	s, err := dgo.New(tokenPrefix + os.Getenv("TOKEN"))
 	isErr(err)
 	s.State.MaxMessageCount = 100
 	d.Session = s
@@ -53,15 +54,14 @@ func (d *Bot) createBot() {
 	isErr(err)
 }
 
+// Add event handlers (listeners) to the bot
 func (d *Bot) addHandlers() {
 	d.Session.AddHandler(handlers.MessageCreated)
 	d.Session.AddHandler(handlers.MemberAdded)
 	d.Session.AddHandler(handlers.MemberRemoved)
 }
 
-/**
-Entry point
-*/
+// Entry point
 func main() {
 	config.LoadConfig()
 
@@ -69,7 +69,7 @@ func main() {
 	bot.createBot()
 	bot.addHandlers()
 
-	// Catch interrupt signal and save config
+	// Catch interrupt signal
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, os.Interrupt, os.Kill, syscall.SIGINT, syscall.SIGTERM)
 	<-signalChan
