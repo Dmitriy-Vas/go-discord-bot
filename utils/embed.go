@@ -5,20 +5,34 @@ import (
 	"time"
 )
 
+const (
+	BOT_NAME    string = "VasBot"
+	PROJECT_URL string = "https://github.com/Dmitriy-Vas/go-discord-bot"
+	COLOR       int    = 16098851
+)
+
 type Embed struct {
 	*dgo.MessageEmbed
 }
 
 func CreateEmbed(title string, description string) *Embed {
 	me := &dgo.MessageEmbed{
-		Author:      &dgo.MessageEmbedAuthor{Name: "VasBot"},
-		Color:       16098851, // todo add random color
+		Author:      &dgo.MessageEmbedAuthor{Name: BOT_NAME, URL: PROJECT_URL},
+		Color:       COLOR, // todo add random color
 		Timestamp:   time.Now().Format(time.RFC3339),
 		Title:       title,
 		Description: description,
 	}
 	e := &Embed{me}
 	return e
+}
+
+func (e *Embed) SetTitle(text string) {
+	e.Title = text
+}
+
+func (e *Embed) SetDescription(text string) {
+	e.Description = text
 }
 
 func (e *Embed) SetFooter(text string) {

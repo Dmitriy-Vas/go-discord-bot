@@ -81,6 +81,8 @@ Now that bot is installed, you will need to setup your config.json file. This ca
 {
     // Your discord token to connect bot
     "token": "KuZrjndpA2sjTCuwqGecWUrkXd2ehysFRx6AM8rqYxr56H",
+    // GitHub personal token to work with GitHub API (v3)
+    "github": "Q7gmSVU6iPK3kX8Dwzhb2g87UQ5CV59aYnWL9gzA",
     // true if you use user account, false if bot
     "user": false,
     // Your prefix to use with commands
@@ -94,7 +96,7 @@ After setting up the config.json file, bot is ready to go. To run program, simpl
 If you have setup your config.json properly (and used the correct credentials) you should see an output similar to this
 
 ```
-Loaded 5 commands
+Loaded 6 commands
 Loaded config
 Logged in as Dmitriy
 ```
@@ -111,15 +113,17 @@ Logged in as Dmitriy
 <details>
 <summary>Commands list</summary>
 
-+ Ping
++ help
+    - Shows list of commands
++ ping
     - Responds with "pong"
-+ Del [0-100]  
++ clear [0-100] [user]
     - Removes specified amount of last messages in the current channel
-+ Notice
-    - Shows bot's notice
-+ Role [user]+ [role]
+    - Optionally: delete messages from mentioned user
++ role [user]+ [role]
     - Adds or removes roles from specified users
-+ Ban [user] [0-n] [word]+
-    - Banhammer's hit. Specified user will lost his soul for specified time.
-    - Provide the correct reason instead of [word], nobody likes to lose souls without reason.
++ projects [word]
+    - Shows list of projects from specified GitHub username
++ stars [word]
+    - Shows how many stars developer have in its GitHub projects
 </details>

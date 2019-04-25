@@ -58,7 +58,7 @@ func (d *Bot) createBot() {
 func (d *Bot) addHandlers() {
 	d.Session.AddHandler(handlers.MessageCreated)
 	d.Session.AddHandler(handlers.MemberAdded)
-	d.Session.AddHandler(handlers.MemberRemoved)
+	// d.Session.AddHandler(handlers.MemberRemoved)
 }
 
 // Entry point
