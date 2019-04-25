@@ -54,6 +54,17 @@ __Bot token:__
 + Use this link and invite bot to your server.
 </details>
 
+<details>
+<summary>How can i get GitHub token?</summary>
+
++ You need available GitHub account.
++ Login in to the GitHub [site](https://github.com/).
++ In the upper right corner click to the your avatar and open menu.
++ Select settings and scroll to the bottom.
++ Select developer settings and go to the personal access tokens.
++ Generate new token (without any scope) and paste its in the `config.json`.
+</details>
+
 ### Install
 
 __Compile bot for yourself with Go:__
