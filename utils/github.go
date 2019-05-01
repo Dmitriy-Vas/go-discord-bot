@@ -36,8 +36,8 @@ var (
 
 func send(method string, url *mod.URL) ([]byte, int) {
 	token := os.Getenv("GITHUB")
-	if token == "" {
-		return nil, 0
+	if len(token) == 0 {
+		return nil, SYS_ERROR
 	}
 
 	request, _ := http.NewRequest(method, url.Link, nil)
@@ -55,13 +55,13 @@ func send(method string, url *mod.URL) ([]byte, int) {
 	response, err := client.Do(request)
 	if err != nil {
 		fmt.Println(err)
-		return nil, 0
+		return nil, SYS_ERROR
 	}
 	defer response.Body.Close()
 	data, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		fmt.Println(err)
-		return nil, 0
+		return nil, SYS_ERROR
 	}
 	return data, response.StatusCode
 }

@@ -4,6 +4,9 @@ package handlers
 import (
 	"../commands"
 	. "../models"
+	"../storage"
+	"cloud.google.com/go/firestore"
+	"context"
 	"fmt"
 	dgo "github.com/bwmarrin/discordgo"
 	"os"
@@ -36,16 +39,22 @@ func init() {
 
 // Fire when someone create new message
 func MessageCreated(s *dgo.Session, m *dgo.MessageCreate) {
-	if !strings.HasPrefix(m.Content, os.Getenv("PREFIX")) {
+	if m.Author.Bot {
 		return
 	}
+	message := &Message{Session: s, MessageCreate: m}
 	// Check for disallowed channels
-	channelType, err := channelType(s, m)
+	channelType, err := channelType(message)
 	if err != nil || !isAllowedChannelType(channelType) {
 		return
 	}
+	if err = increaseXP(message); err != nil {
+		fmt.Println(err)
+	}
+	if !strings.HasPrefix(m.Content, os.Getenv("PREFIX")) {
+		return
+	}
 	// Get alias of command and try to send to the listener
-	message := &Message{Session: s, MessageCreate: m}
 	alias := commandAlias(message)
 	if len(alias) != 0 {
 		listener := listeners[alias]
@@ -53,6 +62,34 @@ func MessageCreated(s *dgo.Session, m *dgo.MessageCreate) {
 			go listener(message)
 		}
 	}
+}
+
+func increaseXP(m *Message) error {
+	ctx := context.Background()
+	user, exists := storage.Users[m.Author.ID]
+	if !exists {
+		u := map[string]interface{}{
+			"xp":   1,
+			"rank": "newbie",
+		}
+		if _, err := storage.Client.Collection("users").Doc(m.Author.ID).Set(ctx, u); err != nil {
+			return err
+		}
+		storage.Users[m.Author.ID] = &DiscordUser{
+			XP:   1,
+			Rank: "newbie",
+		}
+	} else {
+		user.XP++
+		u := map[string]interface{}{
+			"xp": user.XP,
+		}
+		_, err := storage.Client.Collection("users").Doc(m.Author.ID).Set(ctx, u, firestore.MergeAll)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
 
 // Check channel for inconsistency with DM and GroupDM types
@@ -66,10 +103,10 @@ func isAllowedChannelType(channelType *dgo.ChannelType) bool {
 }
 
 // Returns ChannelType of channel
-func channelType(s *dgo.Session, m *dgo.MessageCreate) (*dgo.ChannelType, error) {
-	ch, err := s.State.Channel(m.ChannelID)
+func channelType(m *Message) (*dgo.ChannelType, error) {
+	ch, err := m.State.Channel(m.ChannelID)
 	if err != nil {
-		if ch, err = s.Channel(m.ChannelID); err != nil {
+		if ch, err = m.Channel(m.ChannelID); err != nil {
 			return nil, err
 		}
 	}

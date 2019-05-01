@@ -55,7 +55,7 @@ __Bot token:__
 </details>
 
 <details>
-<summary>How can i get GitHub token?</summary>
+<summary>How can I get GitHub token?</summary>
 
 + You need available GitHub account.
 + Login in to the GitHub [site](https://github.com/).
@@ -103,7 +103,7 @@ Now that bot is installed, you will need to setup your config.json file. This ca
 
 ### Run
 
-After setting up the config.json file, bot is ready to go. To run program, simply use the command go run main.go in the console.
+After setting up the config.json file, bot is ready to go. To run program, simply use the command `go run main.go` in the console.
 If you have setup your config.json properly (and used the correct credentials) you should see an output similar to this
 
 ```

@@ -17,7 +17,7 @@ func Ping(m *Message) {
 	ping := time.Since(timestamp)
 	embed := utils.CreateEmbed("Pong!", fmt.Sprintf("Your ping: %v", ping))
 
-	_, err = m.Session.ChannelMessageSendEmbed(m.MessageCreate.ChannelID, embed.MessageEmbed)
+	_, err = m.ChannelMessageSendEmbed(m.MessageCreate.ChannelID, embed.MessageEmbed)
 	if err != nil {
 		fmt.Println(err)
 	}

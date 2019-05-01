@@ -19,7 +19,7 @@ func Help(m *Message) {
 
 	embed := utils.CreateEmbed("Help", list)
 
-	_, err := m.Session.ChannelMessageSendEmbed(m.ChannelID, embed.MessageEmbed)
+	_, err := m.ChannelMessageSendEmbed(m.ChannelID, embed.MessageEmbed)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -25,7 +25,7 @@ func Stars(m *Message) {
 		embed.SetDescription(fmt.Sprintf("User has %d stars", stars))
 	}
 
-	_, err := m.Session.ChannelMessageSendEmbed(m.MessageCreate.ChannelID, embed.MessageEmbed)
+	_, err := m.ChannelMessageSendEmbed(m.MessageCreate.ChannelID, embed.MessageEmbed)
 	if err != nil {
 		fmt.Println(err)
 	}

@@ -2,8 +2,8 @@ package main
 
 //#region Header
 import (
-	"./config"
 	"./handlers"
+	"./storage"
 	"fmt"
 	dgo "github.com/bwmarrin/discordgo"
 	"log"
@@ -32,7 +32,7 @@ func isErr(err error) {
 // Initialize and connect bot to discord
 func (d *Bot) createBot() {
 	tokenPrefix := ""
-	if !config.Data.User {
+	if !storage.Data.User {
 		tokenPrefix = "Bot "
 	}
 
@@ -63,7 +63,7 @@ func (d *Bot) addHandlers() {
 
 // Entry point
 func main() {
-	config.LoadConfig()
+	storage.Load()
 
 	// Initialize bot
 	bot.createBot()
@@ -75,6 +75,21 @@ func main() {
 	<-signalChan
 
 	// Close connection to discord
-	bot.Session.Close()
+	err := bot.Session.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println("Discord session closed")
+	}
+
+	// Close connection to firebase
+	if storage.Client != nil {
+		err = storage.Client.Close()
+		if err != nil {
+			fmt.Println(err)
+		} else {
+			fmt.Println("Firebase session closed")
+		}
+	}
 	os.Exit(0)
 }

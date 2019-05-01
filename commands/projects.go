@@ -35,7 +35,7 @@ func Projects(m *Message) {
 		embed.SetFields(projectsMap, false)
 	}
 
-	_, err := m.Session.ChannelMessageSendEmbed(m.MessageCreate.ChannelID, embed.MessageEmbed)
+	_, err := m.ChannelMessageSendEmbed(m.MessageCreate.ChannelID, embed.MessageEmbed)
 	if err != nil {
 		fmt.Println(err)
 	}
