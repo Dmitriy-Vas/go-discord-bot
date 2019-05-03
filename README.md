@@ -39,7 +39,7 @@ __Bot token:__
 </details>
 
 <details>
-<summary>How to invite my bot to the server?</summary>
+<summary>How to invite bot to the server?</summary>
 
 + Run your internet browser.
 + Go to the `https://discordapp.com/developers/applications/` site.
@@ -63,6 +63,18 @@ __Bot token:__
 + Select settings and scroll to the bottom.
 + Select developer settings and go to the personal access tokens.
 + Generate new token (without any scope) and paste its in the `config.json`.
+</details>
+
+<details>
+<summary>How can I get Firebase credentials?</summary>
+
++ You need available Google account.
++ Login in to the Firebase [site](https://firebase.google.com/).
++ Select the Firebase console in the right upper corner.
++ Create a new project and select it.
++ In the upper left corner, near the project overview, click on the button with the *gear* icon.
++ Open project settings and go to the "service accounts" tab.
++ Download your service account credentials and put to the `config.json` file.
 </details>
 
 ### Install

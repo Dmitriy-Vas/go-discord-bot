@@ -22,7 +22,7 @@ func Projects(m *Message) {
 	if len(projects) == 0 {
 		embed.SetDescription("Projects not found!")
 	} else {
-		if len(projects) > 10 {
+		if len(projects) > 5 {
 			embed.SetDescription("Shows last 5 projects")
 		}
 		projectsMap := make(map[string]string)
